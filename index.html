@@ -16,12 +16,12 @@
     <style>
         /* 2. 모형(Mockup)을 위한 V3 디자인 시스템 */
         :root {
-            --primary-color: #2563EB;
-            --primary-light: #eff6ff;
+            --primary-color: #6D28D9; /* 신비로운 보라 */
+            --primary-light: #ede9fe;
             --accent-color: #FFC107; /* 칭찬/별점 (골드) */
             --accent-light: #fffbeb;
             --danger-color: #dc3545;
-            --app-bg: #f7f8fc;
+            --app-bg: #f9f7ff; /* 아주 옅은 라벤더 배경 */
             --card-bg: #ffffff;
             --text-color: #1f2937;
             --light-text-color: #6b7280;
@@ -63,7 +63,7 @@
         }
         .app-header {
             padding: 1rem 1.25rem; padding-top: 3rem;
-            background: var(--card-bg);
+            background: linear-gradient(180deg, #ffffff 0%, #f7f5ff 100%);
             border-bottom: 1px solid var(--border-color);
             z-index: 5;
         }
@@ -111,7 +111,7 @@
             display: block; width: 100%; padding: 1rem 1.25rem;
             font-size: 1rem; font-weight: 600; color: #fff;
             background: var(--primary-color); border: none;
-            border-radius: 0.75rem; text-align: center;
+            border-radius: 1rem; text-align: center;
             text-decoration: none; box-sizing: border-box;
             margin-bottom: 0.75rem; cursor: pointer; transition: all 0.2s ease;
             line-height: 1.5; letter-spacing: -0.01em;
@@ -140,7 +140,7 @@
 
         /* 홈: 칭찬 카드 (가장 중요) */
         .praise-card {
-            background: var(--accent-light);
+            background: radial-gradient(circle, #fffdf2 0%, var(--accent-light) 100%);
             border: 1px solid var(--accent-color);
             position: relative;
             overflow: hidden;
@@ -329,7 +329,7 @@
 
         /* 하단 탭 내비게이션 */
         .app-nav {
-            display: flex; background: var(--card-bg);
+            display: flex; background: linear-gradient(180deg, #ffffff 0%, #f7f5ff 100%);
             border-top: 1px solid var(--border-color);
             box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
             padding-bottom: 1.5rem; padding-top: 0.5rem;
@@ -399,11 +399,131 @@
             float: right; cursor: pointer; font-weight: 700; 
             margin-left: 0.75rem; font-size: 1.25rem; line-height: 1;
         }
+        
+        /* 스플래시 스크린 */
+        .splash-screen {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(160deg, #190f32 0%, #46286e 100%);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+            padding-top: 40px; /* 노치 영역 확보 */
+            box-sizing: border-box; /* 패딩이 크기에 영향을 주도록 설정 */
+        }
+        .splash-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .splash-screen.hidden {
+            display: none;
+        }
+        .splash-logo {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: logoFloat 2s ease-in-out infinite;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+        }
+        .splash-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .splash-subtitle {
+            font-size: 1.125rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 500;
+            margin-bottom: 3rem;
+            text-align: center;
+            padding: 0 2rem;
+        }
+        .splash-btn {
+            background: white;
+            color: #764ba2;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-family: "Pretendard", sans-serif;
+        }
+        .splash-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+        }
+        .splash-btn:active {
+            transform: translateY(-1px);
+        }
+        .splash-btn .icon {
+            font-size: 1.5rem;
+            animation: iconPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px white;
+            animation: sparkle-anim 3s infinite;
+            opacity: 0;
+        }
+        .sparkle.s1 { top: 15%; left: 20%; animation-delay: 0s; }
+        .sparkle.s2 { top: 30%; left: 80%; animation-delay: 0.5s; }
+        .sparkle.s3 { top: 70%; left: 10%; animation-delay: 1s; }
+        .sparkle.s4 { top: 85%; left: 60%; animation-delay: 1.5s; }
+
+        @keyframes sparkle-anim {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
     </style>
 </head>
 <body>
 
     <div class="mobile-mockup">
+
+        <!-- 스플래시 스크린 -->
+        <div class="splash-screen" id="splashScreen">
+            <!-- 반짝이는 별들 -->
+            <div class="sparkle s1"></div>
+            <div class="sparkle s2"></div>
+            <div class="sparkle s3"></div>
+            <div class="sparkle s4"></div>
+
+            <div class="splash-logo">🏰</div>
+            <h1 class="splash-title">Cast-Link</h1>
+            <p class="splash-subtitle">당신의 매 순간이 마법이 되는 곳 ✨<br>모든 캐스트를 위한, 특별한 동반자</p>
+            <button class="splash-btn" id="splashBtn">
+                <span class="icon">🏰</span>
+                <span>마법의 세계로</span>
+            </button>
+        </div>
 
         <header class="app-header">
             <h1 id="page-title">🏰 마법의 홈</h1>
@@ -420,12 +540,12 @@
                         <i class="fa-solid fa-gift"></i>
                         <span>💝 따뜻한 마음이 도착했어요!</span>
                     </div>
-                    <p class="highlight"><strong>김*수 손님</strong>께서<br>최시우 님의 환한 미소에 마음이 따뜻해졌다고 하세요! 💕</p>
+                    <p class="highlight"><strong>김*수 손님</strong>께서<br>최시우 님의 찬란한 미소에 행복해졌다고 하세요! </p>
                     <a href="#" class="card-link" data-target="#page-growth">
                         소중한 메시지 확인하기 ✉️ &rarr;
                     </a>
                 </div>
-
+ㄴ
                 <div class="card">
                     <div class="card-header">
                         <i class="fa-solid fa-calendar-day"></i>
@@ -522,7 +642,7 @@
                                 <span class="name">김*수 손님</span>
                                 <span class="date">2시간 전</span>
                             </div>
-                            <p class="message">"비 오는데도 환하게 웃으며 안내해주셔서 마음이 따뜻해졌어요! 💕"</p>
+                            <p class="message">"비 오는데도 환하게 웃으며 안내해주셔서 힐링됐어요! 💕"</p>
                         </div>
                     </div>
                     <div class="praise-item">
@@ -542,7 +662,7 @@
                                 <span class="name">박*진 손님</span>
                                 <span class="date">3일 전</span>
                             </div>
-                            <p class="message">"아이 키에 맞춰 눈을 맞추고 다정하게 말씀해주셔서 감동받았어요 🥰"</p>
+                            <p class="message">"아이 키에 맞춰 따뜻한 눈빛으로 다정하게 말씀해주셔서 감동받았어요 🥰"</p>
                         </div>
                     </div>
                 </div>
@@ -764,7 +884,7 @@
             if (!el) return;
             const list = loadAlerts();
             if (!list.length) {
-                el.innerHTML = '<p class="welcome-sub">현재 알림이 없어요. 평화로운 하루네요! 😊</p>';
+                el.innerHTML = '<p class="welcome-sub" style="text-align:center; padding:2rem 1rem;">🌈 현재 알림이 없어요.<br>평화로운 하루네요! 😊</p>';
                 return;
             }
             el.innerHTML = list.map(a => `
@@ -817,6 +937,27 @@
             const container = document.querySelector('.praise-log');
             if (!container) return;
             const list = loadPraises();
+            
+            // 빈 상태 메시지
+            if (list.length === 0) {
+                const emptyState = `
+                    <div style="text-align:center; padding:3rem 2rem;">
+                        <div style="font-size:3rem; margin-bottom:1rem;">💌</div>
+                        <p style="font-size:1.125rem; font-weight:600; color:var(--text-color); margin-bottom:0.5rem;">
+                            첫 번째 감동을 기다리고 있어요!
+                        </p>
+                        <p style="font-size:0.95rem; color:var(--light-text-color); line-height:1.7;">
+                            오늘의 친절함이 곧 누군가의<br>특별한 추억이 됩니다 ✨
+                        </p>
+                    </div>
+                `;
+                const existingEmpty = container.querySelector('[style*="text-align:center"]');
+                if (!existingEmpty) {
+                    container.insertAdjacentHTML('beforeend', emptyState);
+                }
+                return;
+            }
+            
             const itemsHtml = list.slice(0,20).map(p => `
                 <div class="praise-item">
                     <div class="icon ${p.source==='peer'?'colleague':'customer'}"><i class="fa-solid fa-users"></i></div>
@@ -828,12 +969,16 @@
             `).join('');
             // replace only the items (find existing .praise-item parent)
             const existingItems = container.querySelectorAll('.praise-item');
+            const existingEmpty = container.querySelector('[style*="text-align:center"]');
             if (existingItems.length) {
                 // remove old items
                 existingItems.forEach(n => n.remove());
-                // insert new items at end of card
-                container.insertAdjacentHTML('beforeend', itemsHtml);
             }
+            if (existingEmpty) {
+                existingEmpty.remove();
+            }
+            // insert new items at end of card
+            container.insertAdjacentHTML('beforeend', itemsHtml);
         }
 
         // -- 병가/교대 요청 모달 --
@@ -872,8 +1017,26 @@
             const praiseCard = document.querySelector('.praise-card'); if (praiseCard) praiseCard.addEventListener('dblclick', openShout);
         }
 
+        // 스플래시 스크린 제거
+        function hideSplash() {
+            const splash = document.getElementById('splashScreen');
+            const btn = document.getElementById('splashBtn');
+            
+            if (btn && splash) {
+                btn.addEventListener('click', () => {
+                    splash.classList.add('fade-out');
+                    setTimeout(() => {
+                        splash.classList.add('hidden');
+                    }, 500); // 페이드 아웃 애니메이션 시간
+                });
+            }
+        }
+
         // on load
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+            hideSplash();
+        });
 
     </script>
 
